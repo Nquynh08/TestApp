@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 
 class CapBacAdapter(
@@ -31,8 +32,8 @@ class CapBacAdapter(
         private val idTextView: TextView = itemView.findViewById(R.id.tvId)
         private val nameTextView: TextView = itemView.findViewById(R.id.tvName)
         private val orderingTextView: TextView = itemView.findViewById(R.id.tvOrdering)
-        val editButton: AppCompatButton = itemView.findViewById(R.id.btnEdit)
-        val deleteButton: AppCompatButton = itemView.findViewById(R.id.btnDelete)
+        val editButton: AppCompatImageButton = itemView.findViewById(R.id.btnEdit)
+        val deleteButton: AppCompatImageButton = itemView.findViewById(R.id.btnDelete)
 
         fun bind(item: DanhMucCapBac) {
             idTextView.text = item.id
