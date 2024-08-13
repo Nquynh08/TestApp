@@ -3,13 +3,17 @@ package com.example.testapp
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +21,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var toggle: ActionBarDrawerToggle
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewButton: AppCompatButton
@@ -29,6 +36,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView : NavigationView = findViewById(R.id.nav_view)
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_home -> Toast.makeText(applicationContext, "Clicked Home", Toast.LENGTH_LONG).show()
+                R.id.nav_cb -> Toast.makeText(applicationContext, "Clicked canbo", Toast.LENGTH_LONG).show()
+                R.id.nav_cv -> Toast.makeText(applicationContext, "Clicked chucvu", Toast.LENGTH_LONG).show()
+                R.id.nav_dd -> Toast.makeText(applicationContext, "Clicked daidoi", Toast.LENGTH_LONG).show()
+                R.id.nav_hv -> Toast.makeText(applicationContext, "Clicked hocvien", Toast.LENGTH_LONG).show()
+
+            }
+            true
+        }
 
         recyclerView = findViewById(R.id.recyclerViewCapBac)
         viewButton = findViewById(R.id.btnViewList)
@@ -47,6 +75,15 @@ class MainActivity : AppCompatActivity() {
             .build()
         capBacServiceStub = CapBacServiceGrpc.newBlockingStub(channel)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun fetchCapBacList() {
         val request = GetListCapBacRequest.newBuilder().build()
