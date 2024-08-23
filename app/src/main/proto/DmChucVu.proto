@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package chucvu;
+
+option java_package = "com.example.testapp";
+option java_multiple_files = true;
+
+service ChucVuService {
+    rpc GetListChucVu (GetListChucVuRequest) returns (GetListChucVuResponse);
+    rpc SaveChucVu(SaveChucVuRequest) returns (SaveChucVuResponse);
+    rpc DeleteChucVu(DeleteChucVuRequest) returns (DeleteChucVuResponse);
+    rpc GetChucVu (GetChucVuRequest) returns (GetChucVuResponse);
+}
+
+message GetListChucVuRequest{
+
+}
+
+message GetListChucVuResponse{
+    repeated DanhMucChucVu Items = 1;
+    bool Success = 4;
+    string Message = 6;
+}
+
+message SaveChucVuRequest{
+    DanhMucChucVu Item = 1;
+    bool IsNew = 2;
+}
+
+message SaveChucVuResponse{
+    bool Success = 1;
+    string Message = 2;
+    string MessageException = 3;
+}
+
+message DeleteChucVuRequest{
+    string Id = 1;
+}
+
+message DeleteChucVuResponse{
+    bool Success = 1;
+    string Message = 2;
+    string MessageException = 3;
+}
+
+message GetChucVuRequest{
+    string Id = 1;
+}
+
+message GetChucVuResponse{
+    DanhMucChucVu Item = 1;
+    bool Success = 2;
+    string Message = 3;
+    string MessageException = 4;
+}
+
+
+message DanhMucChucVu{
+    string Id = 1;
+    string Name = 2;
+    int32 Ordering = 3;
+}
