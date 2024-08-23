@@ -22,9 +22,9 @@
             android:title="Chức vụ" />
 
         <item
-            android:id="@+id/nav_dd"
+            android:id="@+id/nav_dv"
             android:icon="@drawable/baseline_people_24"
-            android:title="Đại đội" />
+            android:title="Đơn vị" />
 
         <item
             android:id="@+id/nav_hv"

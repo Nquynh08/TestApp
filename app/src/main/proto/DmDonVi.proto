@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package donvi;
+
+option java_package = "com.example.testapp";
+option java_multiple_files = true;
+
+service DonViService {
+    rpc GetListDonVi (GetListDonViRequest) returns (GetListDonViResponse);
+    rpc SaveDonVi(SaveDonViRequest) returns (SaveDonViResponse);
+    rpc DeleteDonVi(DeleteDonViRequest) returns (DeleteDonViResponse);
+    rpc GetDonVi (GetDonViRequest) returns (GetDonViResponse);
+    rpc SearchDonVi (SearchDonViRequest) returns (SearchDonViResponse);
+}
+
+message GetListDonViRequest{
+
+}
+
+message GetListDonViResponse{
+    repeated DanhMucDonVi Items = 1;
+    bool Success = 4;
+    string Message = 6;
+}
+
+message SaveDonViRequest{
+    DanhMucDonVi Item = 1;
+    bool IsNew = 2;
+}
+
+message SaveDonViResponse{
+    bool Success = 1;
+    string Message = 2;
+    string MessageException = 3;
+}
+
+message DeleteDonViRequest{
+    string Id = 1;
+}
+
+message DeleteDonViResponse{
+    bool Success = 1;
+    string Message = 2;
+    string MessageException = 3;
+}
+
+message GetDonViRequest{
+    string Id = 1;
+}
+
+message GetDonViResponse{
+    DanhMucDonVi Item = 1;
+    bool Success = 2;
+    string Message = 3;
+    string MessageException = 4;
+}
+
+message SearchDonViRequest {
+    string Id = 1;
+    string Name = 2;
+    string pId = 3;
+
+
+}
+
+message SearchDonViResponse {
+    repeated DanhMucDonVi Items = 1;
+    bool Success = 2;
+    string Message = 3;
+    string MessageException = 4;
+}
+
+
+message DanhMucDonVi{
+    string Id = 1;
+    string Name = 2;
+    string pId = 3;
+}

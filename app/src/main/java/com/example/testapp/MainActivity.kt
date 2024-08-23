@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.fragment_container, CapBacFragment()).commit()
             R.id.nav_cv -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ChucVuFragment()).commit()
+            R.id.nav_dv -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, DonViFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
